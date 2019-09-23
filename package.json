@@ -1,0 +1,20 @@
+{
+  "name": "LIRI-App",
+  "version": "1.0.0",
+  "description": "UCSD - Homework 8 - LIRI App. Like SIRI, but for Written Commands.",
+  "main": "keys.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jmmarketing/LIRI-App.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jmmarketing/LIRI-App/issues"
+  },
+  "homepage": "https://github.com/jmmarketing/LIRI-App#readme"
+}
