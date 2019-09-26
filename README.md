@@ -1,5 +1,6 @@
 # LIRI-App
 UCSD - Homework 8 - LIRI App. Like SIRI, but for Written Commands. 
+Video Example of How It Works: https://youtu.be/ice9kJATnGM
 
 # Purpose: 
 The Liri app is a practice project to become better familiarized with using Node to run javascript files. In this project we practice running API calls with Axios, the Node Spotify API, moment.js NPM, and the FileSave NPM. 
