@@ -20,9 +20,17 @@ var searchItem = process.argv.slice(3).join("+");
 function concertThis() {
     axios.get("https://rest.bandsintown.com/artists/" + searchItem + "/events?app_id=codingbootcamp").then(function (resp) {
         //console.log(resp.data);
-        console.log("Next Concert: " + moment(resp.data[0].datetime).format("dddd, MMMM Do YYYY, h:mm:a"));
-        console.log("Venue: " + resp.data[0].venue.name)
-        console.log("Location: " + resp.data[0].venue.city + ", " + resp.data[0].venue.country)
+        var nextConcert = moment(resp.data[0].datetime).format("dddd, MMMM Do YYYY, h:mm:a");
+        var venue = resp.data[0].venue.name;
+        var location = resp.data[0].venue.city +", "+resp.data[0].venue.country
+        var concertInfo = "Next Concert: " + nextConcert + "\nVenue: " + venue + "\nLocation: " + location +"\n---------\n";
+
+        console.log(concertInfo);
+
+        fs.appendFile("log.txt", concertInfo, function(err){
+            if (err) throw err;
+            console.log ("Concert Info Added to File")
+        } )
     })
         .catch(function (err) {
             console.log(err);
@@ -43,11 +51,16 @@ function spotifyThis() {
         var songArtist = resp.tracks.items[0].album.artists[0].name;
         var songTitle = resp.tracks.items[0].name;
         var songUrl = resp.tracks.items[0].external_urls.spotify;
+        var songInfo = "Song: " + songTitle + "\nArtist: " + songArtist + "\nAlbum: " + album + "\nListen: " + songUrl + "\n---------\n";
 
-        console.log("Song: " + songTitle);
-        console.log("Performing Artist: " + songArtist);
-        console.log("From their Album: " + album);
-        console.log("Listen: " + songUrl);
+        console.log(songInfo); 
+        
+
+        fs.appendFile("log.txt", songInfo, function(err){
+            if (err) throw err;
+            console.log ("Song Info Added to File")
+        } )
+
     }).catch(function (err) {
         console.log(err);
     })
@@ -64,15 +77,23 @@ function movieThis() {
     }
 
     axios.get("http://www.omdbapi.com/?apikey=trilogy&t=" + searchItem + "&type=movie").then(function (resp) {
-        //console.log(resp.data);
-        console.log("Movie Title: " + resp.data.Title)
-        console.log("Year: " + resp.data.Year)
-        console.log("IMDB Rating: " + resp.data.Ratings[0].Value)
-        console.log("Rotten Tomatoes Rating: " + resp.data.Ratings[1].Value)
-        console.log("Country: " + resp.data.Country)
-        console.log("Language(s): " + resp.data.Language)
-        console.log("Plot: " + resp.data.Plot)
-        console.log("Actors: " + resp.data.Actors)
+         var movieTitle = resp.data.Title;
+         var movieYear = resp.data.Year;
+         var imdbRating = resp.data.Ratings[0].Value;
+         var rtRating = resp.data.Ratings[1].Value;
+         var movCountry = resp.data.Country;
+         var movLang = resp.data.Language;
+         var moviePlot = resp.data.Plot;
+         var actors = resp.data.Actors;
+
+        var movieInfo = "Movie Title: " + movieTitle + "\nYear: " + movieYear + "\nIMDB Rating: " + imdbRating + "\nRotten Tomatoes: " + rtRating + "\nCountry: " + movCountry + "\nLanguage: " + movLang + "\nActors: " + actors + "\nPlot: " + moviePlot +"\n---------\n";
+
+        console.log(movieInfo);
+
+        fs.appendFile("log.txt", movieInfo, function(err){
+            if (err) throw err;
+            console.log ("Movie Info Added to File")
+        } )
 
     })
         .catch(function (err) {
