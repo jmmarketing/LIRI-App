@@ -34,6 +34,10 @@ function concertThis() {
 
 // -------------- Spotify This Function -----------------------
 function spotifyThis() {
+    if (!searchItem){
+        searchItem = "The+Sign";
+    }
+  
     spotify.search({ type: 'track', query: searchItem }).then(function (resp) {
         var album = resp.tracks.items[0].album.name;
         var songArtist = resp.tracks.items[0].album.artists[0].name;
@@ -45,7 +49,6 @@ function spotifyThis() {
         console.log("From their Album: " + album);
         console.log("Listen: " + songUrl);
     }).catch(function (err) {
-        console.log("You must specify a song")
         console.log(err);
     })
 }
@@ -55,6 +58,10 @@ function spotifyThis() {
 
 // -------------- Movie This Function -----------------------
 function movieThis() {
+
+    if (!searchItem){
+        searchItem = "Mr.Nobody";
+    }
 
     axios.get("http://www.omdbapi.com/?apikey=trilogy&t=" + searchItem + "&type=movie").then(function (resp) {
         //console.log(resp.data);
